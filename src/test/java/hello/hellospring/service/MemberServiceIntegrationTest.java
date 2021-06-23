@@ -15,7 +15,7 @@ import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-@Transactional //
+@Transactional //테스트 후 롤백 시켜준다. 테스트 반복 가능
 class MemberServiceIntegrationTest {
 
     @Autowired //테스트는 편한 방법으로 하면 된다.
@@ -27,7 +27,7 @@ class MemberServiceIntegrationTest {
     void 회원가입() {
         //given
         Member member = new Member();
-        member.setName("hello");
+        member.setName("spring");
 
         //when
         Long saveId = memberService.join(member);
