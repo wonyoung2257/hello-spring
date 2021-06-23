@@ -29,9 +29,16 @@ public class MemberService {
         //같은 이름이 있는 중복 회원X
         //null이 아닐때 밑의 if가 동작 null일 가능성이 있으면 Optional 사용
 //        Optional<Member> result = memberRepository.findByName(member.getName());
-        validateDuplicateMember(member);//중복 회원 검증
-        memberRepository.save(member);
-        return member.getId();
+        long start = System.currentTimeMillis();
+        try{
+            validateDuplicateMember(member);
+            memberRepository.save(member);
+            return member.getId();
+        }finally {
+            long finish = System.currentTimeMillis();
+            long timeMs = finish - start;
+            System.out.println("join = " + timeMs + "ms");
+        }
     }
 
     private void validateDuplicateMember(Member member) {
